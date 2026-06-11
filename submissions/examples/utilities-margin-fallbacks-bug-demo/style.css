@@ -1,0 +1,14 @@
+/* utilities.css bug demo: margin missing fallbacks */
+
+body { margin: 2rem; font-family: system-ui, sans-serif; }
+
+.ease-margin     { margin: var(--ease-space-4) !important; } /* BUG */
+.ease-margin-1   { margin: var(--ease-space-1) !important; } /* BUG */
+.ease-margin-2   { margin: var(--ease-space-2) !important; } /* BUG */
+.ease-margin-3   { margin: var(--ease-space-3) !important; } /* BUG */
+.ease-margin-4   { margin: var(--ease-space-4, 1rem) !important; } /* OK */
+.ease-margin-6   { margin: var(--ease-space-6) !important; } /* BUG */
+.ease-margin-8   { margin: var(--ease-space-8) !important; } /* BUG */
+.ease-margin-auto { margin: auto !important; } /* OK (no var) */
+
+/* FIX: add fallbacks for all */

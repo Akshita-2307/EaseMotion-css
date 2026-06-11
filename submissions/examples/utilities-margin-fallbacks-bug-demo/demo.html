@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Utilities – Margin missing var() fallbacks</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Bug: margin utilities missing fallbacks</h1>
+  <p>Without the base layer, margin utilities resolve to <code>initial</code>.</p>
+
+  <div class="ease-margin-4" style="background:#e2e8f0;border:1px solid #94a3b8">
+    .ease-margin-4 — uses fallback (works)
+  </div>
+  <div class="ease-margin-2" style="background:#e2e8f0;border:1px solid #94a3b8">
+    .ease-margin-2 — NO fallback (broken)
+  </div>
+
+  <hr />
+  <h2>Fix</h2>
+  <pre>
+.ease-margin-1  { margin: var(--ease-space-1, 0.25rem) !important; }
+.ease-margin-2  { margin: var(--ease-space-2, 0.5rem) !important; }
+/* ... etc */
+  </pre>
+</body>
+</html>
