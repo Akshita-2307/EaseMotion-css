@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buttons – .ease-btn-icon missing size variants</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Bug: .ease-btn-icon missing sm/lg variants</h1>
+  <p>Text buttons have <code>.ease-btn-sm</code> / <code>.ease-btn-lg</code>, but icon buttons only have one size.</p>
+
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+    <button class="ease-btn ease-btn-icon ease-btn-primary">★</button>
+    <span>Icon button (only size available)</span>
+  </div>
+
+  <p><strong>Missing (no <code>.ease-btn-icon-sm</code> or <code>.ease-btn-icon-lg</code>):</strong></p>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <button class="ease-btn ease-btn-icon-sm ease-btn-primary">★</button>
+    <span>Small icon button (would use <code>.ease-btn-icon-sm</code>)</span>
+  </div>
+
+  <hr />
+  <h2>Fix</h2>
+  <pre>
+.ease-btn-icon-sm {
+  padding: var(--ease-space-2, 0.5rem);
+  border-radius: var(--ease-radius-sm, 0.25rem);
+}
+.ease-btn-icon-lg {
+  padding: var(--ease-space-4, 1rem);
+  border-radius: var(--ease-radius-lg, 1rem);
+}
+  </pre>
+</body>
+</html>
