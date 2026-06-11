@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masonry – Reduced motion kills ALL child transitions</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Bug: reduced motion kills all child transitions</h1>
+  <p>Under <code>prefers-reduced-motion: reduce</code>, ALL masonry children get <code>transition: none !important</code> — even cards with hover transitions that should be preserved.</p>
+
+  <div class="ease-masonry-2">
+    <div class="ease-card ease-card-hover">Card with hover lift (transition killed)</div>
+    <div class="ease-card">Static card</div>
+    <div class="ease-card ease-card-hover">Card with hover lift (transition killed)</div>
+    <div class="ease-card">Static card</div>
+  </div>
+
+  <hr />
+  <h2>Source</h2>
+  <pre>
+@media (prefers-reduced-motion: reduce) {
+  .ease-masonry > *,
+  .ease-masonry-2 > *,
+  .ease-masonry-3 > *,
+  .ease-masonry-4 > * {
+    transition: none !important;  /* too broad */
+  }
+}
+  </pre>
+</body>
+</html>
