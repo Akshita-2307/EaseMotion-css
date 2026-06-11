@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Utilities – Text size missing var() fallbacks</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Bug: text utilities missing fallbacks</h1>
+  <p>Without the base layer, font-size resolves to <code>initial</code> (medium).</p>
+
+  <p class="ease-text-xs">ease-text-xs — no fallback</p>
+  <p class="ease-text-sm">ease-text-sm — no fallback</p>
+  <p class="ease-text-base">ease-text-base — no fallback</p>
+  <p class="ease-text-lg">ease-text-lg — no fallback</p>
+  <p class="ease-text-xl">ease-text-xl — no fallback</p>
+  <p class="ease-text-2xl">ease-text-2xl — no fallback</p>
+  <p class="ease-text-3xl">ease-text-3xl — no fallback</p>
+  <p class="ease-text-4xl">ease-text-4xl — no fallback</p>
+
+  <hr />
+  <h2>Fix</h2>
+  <pre>
+.ease-text-xs   { font-size: var(--ease-text-xs, 0.75rem) !important; }
+.ease-text-sm   { font-size: var(--ease-text-sm, 0.875rem) !important; }
+.ease-text-base { font-size: var(--ease-text-base, 1rem) !important; }
+/* ... etc */
+  </pre>
+</body>
+</html>

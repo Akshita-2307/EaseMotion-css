@@ -1,0 +1,24 @@
+/* utilities.css bug demo: text utilities missing fallbacks */
+
+body { margin: 2rem; font-family: system-ui, sans-serif; }
+
+.ease-text-xs   { font-size: var(--ease-text-xs) !important; }   /* BUG */
+.ease-text-sm   { font-size: var(--ease-text-sm) !important; }   /* BUG */
+.ease-text-base { font-size: var(--ease-text-base) !important; } /* BUG */
+.ease-text-lg   { font-size: var(--ease-text-lg) !important; }   /* BUG */
+.ease-text-xl   { font-size: var(--ease-text-xl) !important; }   /* BUG */
+.ease-text-2xl  { font-size: var(--ease-text-2xl) !important; }  /* BUG */
+.ease-text-3xl  { font-size: var(--ease-text-3xl) !important; }  /* BUG */
+.ease-text-4xl  { font-size: var(--ease-text-4xl) !important; }  /* BUG */
+
+/* FIX */
+/*
+.ease-text-xs   { font-size: var(--ease-text-xs, 0.75rem) !important; }
+.ease-text-sm   { font-size: var(--ease-text-sm, 0.875rem) !important; }
+.ease-text-base { font-size: var(--ease-text-base, 1rem) !important; }
+.ease-text-lg   { font-size: var(--ease-text-lg, 1.125rem) !important; }
+.ease-text-xl   { font-size: var(--ease-text-xl, 1.25rem) !important; }
+.ease-text-2xl  { font-size: var(--ease-text-2xl, 1.5rem) !important; }
+.ease-text-3xl  { font-size: var(--ease-text-3xl, 1.875rem) !important; }
+.ease-text-4xl  { font-size: var(--ease-text-4xl, 2.25rem) !important; }
+*/
