@@ -1,0 +1,27 @@
+/* base.css bug demo: heading var() without fallbacks */
+
+body { margin: 2rem; font-family: system-ui, sans-serif; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ease-color-neutral-900);
+  /* BUG: no fallback */
+}
+
+h1 { font-size: var(--ease-text-4xl); } /* BUG */
+h2 { font-size: var(--ease-text-3xl); } /* BUG */
+h3 { font-size: var(--ease-text-2xl); } /* BUG */
+h4 { font-size: var(--ease-text-xl); }  /* BUG */
+h5 { font-size: var(--ease-text-lg); }  /* BUG */
+h6 { font-size: var(--ease-text-base); } /* BUG */
+
+/* FIX */
+/*
+h1 { font-size: var(--ease-text-4xl, 2.25rem); }
+h2 { font-size: var(--ease-text-3xl, 1.875rem); }
+h3 { font-size: var(--ease-text-2xl, 1.5rem); }
+h4 { font-size: var(--ease-text-xl, 1.25rem); }
+h5 { font-size: var(--ease-text-lg, 1.125rem); }
+h6 { font-size: var(--ease-text-base, 1rem); }
+*/

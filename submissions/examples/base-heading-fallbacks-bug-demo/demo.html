@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>base.css – Headings missing var() fallbacks</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Heading 1 (var(--ease-text-4xl) without fallback)</h1>
+  <h2>Heading 2 (var(--ease-text-3xl) without fallback)</h2>
+  <h3>Heading 3 (var(--ease-text-2xl) without fallback)</h3>
+
+  <hr />
+  <h2>Fix</h2>
+  <pre>
+h1 { font-size: var(--ease-text-4xl, 2.25rem); }
+h2 { font-size: var(--ease-text-3xl, 1.875rem); }
+h3 { font-size: var(--ease-text-2xl, 1.5rem); }
+h4 { font-size: var(--ease-text-xl, 1.25rem); }
+h5 { font-size: var(--ease-text-lg, 1.125rem); }
+h6 { font-size: var(--ease-text-base, 1rem); }
+  </pre>
+</body>
+</html>
