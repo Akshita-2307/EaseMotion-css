@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masonry Validate Paths — EaseMotion CSS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <h1 class="page-title">Masonry Path Validation</h1>
+      <p class="page-copy">Invalid grid-area references break masonry layout when paths are not validated.</p>
+      <a class="issue-link" href="https://github.com/anomalyco/easemotion/issues/5756" target="_blank">Issue #5756</a>
+    </header>
+
+    <section class="demo-section">
+      <h2 class="section-title">The Problem</h2>
+      <p class="section-desc">Masonry items with <code>grid-area</code> referencing undefined template areas fall into default flow, breaking the intended arrangement.</p>
+    </section>
+
+    <section class="demo-section">
+      <h2 class="section-title">Before vs After</h2>
+      <div class="compare-grid">
+        <div class="compare-card broken">
+          <span class="label label-broken">Broken — Invalid Paths</span>
+          <h3>Unvalidated Grid Areas</h3>
+          <div class="masonry-grid broken-grid">
+            <div class="masonry-item">Item 1</div>
+            <div class="masonry-item">Item 2</div>
+            <div class="masonry-item item-invalid">Item 3 (invalid ref)</div>
+            <div class="masonry-item">Item 4</div>
+          </div>
+          <p class="note">Item 3 references <code>grid-area: item-x</code> which doesn't exist.</p>
+        </div>
+        <div class="compare-card fixed">
+          <span class="label label-fixed">Fixed — Validated Paths</span>
+          <h3>Validated Grid Areas</h3>
+          <div class="masonry-grid fixed-grid">
+            <div class="masonry-item">Item 1</div>
+            <div class="masonry-item">Item 2</div>
+            <div class="masonry-item">Item 3</div>
+            <div class="masonry-item">Item 4</div>
+          </div>
+          <p class="note">All grid-area references validated against template.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
