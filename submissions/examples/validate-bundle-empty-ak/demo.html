@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Validate Bundle Empty — EaseMotion CSS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <h1 class="page-title">Empty Bundle Validation Bug</h1>
+      <p class="page-copy">Build validation does not detect when the generated CSS bundle is empty.</p>
+      <a class="issue-link" href="https://github.com/anomalyco/easemotion/issues/5759" target="_blank">Issue #5759</a>
+    </header>
+
+    <section class="demo-section">
+      <h2 class="section-title">The Problem</h2>
+      <p class="section-desc">When the build step fails silently and produces an empty <code>easemotion.min.css</code>, the validation script checks file existence but not content. Users deploying the build get zero styles with no warning.</p>
+    </section>
+
+    <section class="demo-section">
+      <h2 class="section-title">Before vs After</h2>
+      <div class="compare-grid">
+        <div class="compare-card broken">
+          <span class="label label-broken">Broken — No Content Check</span>
+          <h3>Validates Existence Only</h3>
+          <div class="bundle-demo">
+            <div class="bundle-status empty-bundle">
+              <span class="status-icon">⚠️</span>
+              <span>easemotion.min.css (0 bytes)</span>
+              <span class="check-badge">✓ Passed</span>
+            </div>
+          </div>
+          <p class="note">Bundle exists but is empty — validation passes incorrectly.</p>
+        </div>
+        <div class="compare-card fixed">
+          <span class="label label-fixed">Fixed — Content Validation</span>
+          <h3>Validates Content + Existence</h3>
+          <div class="bundle-demo">
+            <div class="bundle-status valid-bundle">
+              <span class="status-icon">✓</span>
+              <span>easemotion.min.css (48 KB)</span>
+              <span class="check-badge pass">✓ Passed</span>
+            </div>
+            <div class="bundle-status empty-bundle">
+              <span class="status-icon">⚠️</span>
+              <span>easemotion.min.css (0 bytes)</span>
+              <span class="check-badge fail">✗ Failed</span>
+            </div>
+          </div>
+          <p class="note">Bundle size is validated — empty bundles trigger a build failure.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
