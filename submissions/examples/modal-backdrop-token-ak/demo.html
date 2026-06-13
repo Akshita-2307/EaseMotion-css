@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modal Backdrop Token — EaseMotion CSS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <h1 class="page-title">Modal Backdrop Token Bug</h1>
+      <p class="page-copy">Hardcoded backdrop color ignores the <code>--ease-overlay-bg</code> token system.</p>
+      <a class="issue-link" href="https://github.com/anomalyco/easemotion/issues/5758" target="_blank">Issue #5758</a>
+    </header>
+
+    <section class="demo-section">
+      <h2 class="section-title">The Problem</h2>
+      <p class="section-desc">The modal backdrop uses <code>rgba(0,0,0,0.5)</code> directly instead of <code>var(--ease-overlay-bg)</code>. Users who customize <code>--ease-overlay-bg</code> expect the modal backdrop to respect their token.</p>
+    </section>
+
+    <section class="demo-section">
+      <h2 class="section-title">Before vs After</h2>
+      <div class="compare-grid">
+        <div class="compare-card broken">
+          <span class="label label-broken">Broken — Hardcoded</span>
+          <h3>Fixed rgba() Backdrop</h3>
+          <div class="modal-demo">
+            <div class="modal-backdrop broken-backdrop"></div>
+            <div class="modal-box">Modal Content</div>
+          </div>
+          <p class="note">Backdrop uses <code>rgba(0,0,0,0.5)</code> — ignores <code>--ease-overlay-bg</code>.</p>
+        </div>
+        <div class="compare-card fixed">
+          <span class="label label-fixed">Fixed — Token-Based</span>
+          <h3>Variable Backdrop</h3>
+          <div class="modal-demo" style="--ease-overlay-bg: rgba(99, 102, 241, 0.4);">
+            <div class="modal-backdrop fixed-backdrop"></div>
+            <div class="modal-box">Modal Content</div>
+          </div>
+          <p class="note">Backdrop respects <code>--ease-overlay-bg</code> token.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
