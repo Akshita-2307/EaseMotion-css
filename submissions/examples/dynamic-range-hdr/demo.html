@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Dynamic Range HDR - Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="hdr-header">
+    <h1>Dynamic Range HDR</h1>
+    <p>HDR-aware media queries with wide-gamut colors and SDR fallbacks</p>
+    <div class="hdr-badge" id="hdrBadge">SDR Mode</div>
+  </div>
+
+  <section class="demo-grid">
+    <div class="gradient-card" id="card1">
+      <h2>Gradient Orb</h2>
+      <p>HDR-enhanced radial gradient with Oklch colors</p>
+    </div>
+    <div class="gradient-card" id="card2">
+      <h2>Glow Element</h2>
+      <p>Vibrant neon glow using Display-P3 gamut</p>
+    </div>
+    <div class="gradient-card" id="card3">
+      <h2>Wide Gamut</h2>
+      <p>Rich saturated background with sRGB fallback</p>
+    </div>
+  </section>
+
+  <section class="comparison-section">
+    <h2>HDR Feature Detection</h2>
+    <div class="detection-grid">
+      <div class="detect-card">
+        <span class="detect-label">dynamic-range</span>
+        <span class="detect-value" id="dynamicRangeValue">checking...</span>
+      </div>
+      <div class="detect-card">
+        <span class="detect-label">color-gamut</span>
+        <span class="detect-value" id="colorGamutValue">checking...</span>
+      </div>
+      <div class="detect-card">
+        <span class="detect-label">Oklch support</span>
+        <span class="detect-value" id="oklchValue">checking...</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function() {
+      var badge = document.getElementById('hdrBadge');
+      var drVal = document.getElementById('dynamicRangeValue');
+      var cgVal = document.getElementById('colorGamutValue');
+      var okVal = document.getElementById('oklchValue');
+
+      var isHDR = false;
+      var isP3 = false;
+
+      var mqHDR = window.matchMedia('(dynamic-range: high)');
+      var mqP3 = window.matchMedia('(color-gamut: p3)');
+
+      function update() {
+        isHDR = mqHDR.matches;
+        isP3 = mqP3.matches;
+        drVal.textContent = isHDR ? 'high' : 'standard';
+        cgVal.textContent = isP3 ? 'p3' : 'srgb';
+        okVal.textContent = CSS.supports('color', 'oklch(0.5 0.2 180)') ? 'supported' : 'not supported';
+
+        if (isHDR) {
+          badge.textContent = 'HDR Mode';
+          badge.className = 'hdr-badge hdr-active';
+        } else {
+          badge.textContent = 'SDR Mode';
+          badge.className = 'hdr-badge';
+        }
+      }
+
+      update();
+      mqHDR.addEventListener('change', update);
+      mqP3.addEventListener('change', update);
+    })();
+  </script>
+
+</body>
+</html>
