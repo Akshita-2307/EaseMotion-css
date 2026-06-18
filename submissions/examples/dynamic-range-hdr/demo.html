@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Dynamic Range HDR Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Dynamic Range &amp; HDR Colors</h1>
+    <p>Using <code>@media (dynamic-range: high)</code> to serve vibrant wide-gamut colors on HDR displays with smooth SDR fallbacks.</p>
+  </header>
+
+  <main>
+    <section class="hdr-status" id="hdrStatus">
+      <span class="status-dot"></span>
+      <span class="status-text">Detecting display capabilities...</span>
+    </section>
+
+    <section class="card-grid">
+      <article class="color-card" style="--hue: 15">
+        <div class="card-swatch"></div>
+        <h3>Vibrant Coral</h3>
+        <p>oklch(70% 0.2 25) — pushes beyond sRGB gamut for a rich, luminous coral tone.</p>
+      </article>
+      <article class="color-card" style="--hue: 190">
+        <div class="card-swatch"></div>
+        <h3>Deep Cyan</h3>
+        <p>oklch(65% 0.15 200) — a saturated cyan that appears deeper on HDR panels.</p>
+      </article>
+      <article class="color-card" style="--hue: 85">
+        <div class="card-swatch"></div>
+        <h3>Bright Lime</h3>
+        <p>oklch(80% 0.18 140) — luminous green only achievable with wide-gamut color.</p>
+      </article>
+      <article class="color-card" style="--hue: 280">
+        <div class="card-swatch"></div>
+        <h3>Neon Purple</h3>
+        <p>oklch(60% 0.22 300) — extreme chromatic purple that exceeds sRGB limits.</p>
+      </article>
+    </section>
+
+    <section class="gradient-showcase">
+      <h2>HDR-Enhanced Gradients</h2>
+      <div class="gradient-bar g1"></div>
+      <div class="gradient-bar g2"></div>
+      <div class="gradient-bar g3"></div>
+    </section>
+
+    <section class="sdr-notice">
+      <p>If you are viewing on a standard SDR display, the colors above have been gracefully degraded to sRGB. On an HDR-capable screen, they will appear more vibrant and luminous.</p>
+    </section>
+  </main>
+
+  <script>
+    const status = document.getElementById('hdrStatus');
+    const dot = status.querySelector('.status-dot');
+    const text = status.querySelector('.status-text');
+    const isHDR = window.matchMedia('(dynamic-range: high)').matches;
+    const gamut = window.matchMedia('(color-gamut: p3)').matches ? 'P3' : 'sRGB';
+    dot.className = 'status-dot ' + (isHDR ? 'hdr' : 'sdr');
+    text.textContent = isHDR
+      ? 'HDR display detected — wide-gamut colors active (color-gamut: ' + gamut + ')'
+      : 'SDR display — colors shown within sRGB limits (color-gamut: ' + gamut + ')';
+  </script>
+</body>
+</html>
