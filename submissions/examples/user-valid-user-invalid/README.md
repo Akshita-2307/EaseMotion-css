@@ -1,13 +1,17 @@
 # CSS :user-valid / :user-invalid Form Validation
 
-## What
+## Overview
+Demonstrates the CSS `:user-valid` and `:user-invalid` pseudo-classes for form validation UX. Unlike `:valid`/`:invalid` which apply immediately on page load, these user-interaction pseudo-classes only activate after the user has interacted with a form field.
 
-This example demonstrates the CSS `:user-valid` and `:user-invalid` pseudo-classes for interaction-based form validation. Unlike `:valid`/`:invalid` which fire immediately, `:user-valid` and `:user-invalid` only apply after the user has interacted with the field, providing a better UX.
+## Features
+- **`:user-valid`** — applies styles when a field is valid AND the user has interacted with it
+- **`:user-invalid`** — applies styles when a field is invalid AND the user has interacted with it
+- **Shake animation** — draws attention to fields that fail validation after user interaction
+- **`:has()` integration** — parent `.form-group` elements detect child field validation state
+- **Password requirements** — live feedback on length, number, and uppercase letter requirements
 
-## How
-
-The `:user-valid` and `:user-invalid` pseudo-classes are combined with `:focus`, `:focus-within`, and `::after` content to show dynamic validation feedback. Inputs with `required`, `type="email"`, `minlength`, and `pattern` attributes trigger state changes. Animated indicators (checkmark, error icon, shake) enhance the feedback.
-
-## Why
-
-`:user-valid`/`:user-invalid` solves the problem of showing validation errors too early (before the user has had a chance to type) or too late. They only activate after user interaction, reducing distraction while providing immediate, contextual feedback. This is a modern CSS-only approach to form validation UX.
+## How to Use
+1. Add `:user-valid` and `:user-invalid` to input selectors alongside normal `:focus` styles
+2. Use `form:has(:user-invalid)` to style the entire form when any field has user-flagged errors
+3. Pair with `:has()` for parent-level validation indicators
+4. Add subtle animations (like shake) only on `:user-invalid` to avoid overwhelming users on page load

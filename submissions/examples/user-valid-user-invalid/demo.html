@@ -7,77 +7,80 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>:user-valid &amp; :user-invalid</h1>
-      <p>Interaction-based form validation pseudo-classes — feedback only after user interaction</p>
-    </header>
+  <header>
+    <h1>:user-valid &amp; :user-invalid</h1>
+    <p>Form validation pseudo-classes that only activate <em>after</em> the user has interacted with a field.</p>
+  </header>
 
+  <main>
     <form class="demo-form" novalidate>
-      <div class="field">
-        <label for="fullname">Full Name <span class="required">*</span></label>
-        <input type="text" id="fullname" name="fullname" required minlength="3" placeholder="e.g. Jane Doe">
-        <span class="hint">At least 3 characters</span>
-        <span class="feedback valid">Looks good!</span>
-        <span class="feedback invalid">Please enter at least 3 characters</span>
+      <div class="form-group">
+        <label for="name">Full Name <span class="required">*</span></label>
+        <input type="text" id="name" name="name" required minlength="2" pattern="[A-Za-z\s]+" placeholder="e.g. Jane Doe">
+        <span class="field-message"></span>
       </div>
 
-      <div class="field">
+      <div class="form-group">
         <label for="email">Email Address <span class="required">*</span></label>
         <input type="email" id="email" name="email" required placeholder="you@example.com">
-        <span class="hint">Must be a valid email</span>
-        <span class="feedback valid">Valid email address</span>
-        <span class="feedback invalid">Please enter a valid email</span>
+        <span class="field-message"></span>
       </div>
 
-      <div class="field">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="555-123-4567">
-        <span class="hint">Format: 555-123-4567</span>
-        <span class="feedback valid">Valid format</span>
-        <span class="feedback invalid">Use format: 555-123-4567</span>
-      </div>
-
-      <div class="field">
+      <div class="form-group">
         <label for="password">Password <span class="required">*</span></label>
         <input type="password" id="password" name="password" required minlength="8" placeholder="At least 8 characters">
-        <span class="hint">Minimum 8 characters</span>
-        <span class="feedback valid">Strong enough</span>
-        <span class="feedback invalid">Must be at least 8 characters</span>
+        <div class="password-requirements">
+          <span class="req" data-req="length">8+ characters</span>
+          <span class="req" data-req="number">Contains a number</span>
+          <span class="req" data-req="upper">Uppercase letter</span>
+        </div>
+        <span class="field-message"></span>
       </div>
 
-      <div class="field">
+      <div class="form-group">
         <label for="age">Age <span class="required">*</span></label>
-        <input type="number" id="age" name="age" required min="18" max="120" placeholder="18-120">
-        <span class="hint">Must be 18 or older</span>
-        <span class="feedback valid">Age verified</span>
-        <span class="feedback invalid">You must be at least 18</span>
+        <input type="number" id="age" name="age" required min="13" max="120" placeholder="13+">
+        <span class="field-message"></span>
       </div>
 
-      <div class="field">
-        <label for="url">Website</label>
-        <input type="url" id="url" name="url" placeholder="https://example.com">
-        <span class="hint">Full URL with protocol</span>
-        <span class="feedback valid">Valid URL</span>
-        <span class="feedback invalid">Please enter a full URL</span>
+      <div class="form-group">
+        <label for="website">Website</label>
+        <input type="url" id="website" name="website" placeholder="https://example.com">
+        <span class="field-message"></span>
       </div>
 
-      <div class="field checkbox-field">
-        <label class="checkbox-label">
-          <input type="checkbox" id="terms" name="terms" required>
-          <span class="checkbox-custom"></span>
-          I agree to the Terms and Conditions <span class="required">*</span>
-        </label>
-        <span class="feedback valid">Accepted</span>
-        <span class="feedback invalid">You must agree to continue</span>
-      </div>
-
-      <button type="submit" class="submit-btn">Submit Registration</button>
+      <button type="submit" class="submit-btn">Create Account</button>
     </form>
 
-    <footer>
-      <p>Uses <code>:user-valid</code> and <code>:user-invalid</code> — modern CSS interaction-based validation.</p>
-    </footer>
-  </div>
+    <aside class="info-panel">
+      <h3>How it works</h3>
+      <ul>
+        <li><code>:user-valid</code> applies a green border + check icon after the user has interacted with a valid field</li>
+        <li><code>:user-invalid</code> applies a red border + error icon after the user has interacted with an invalid field</li>
+        <li>Unlike <code>:valid</code>/<code>:invalid</code>, these do NOT fire on page load — only after user interaction</li>
+        <li>Shake animation draws attention to invalid fields</li>
+      </ul>
+    </aside>
+  </main>
+
+  <script>
+    document.querySelector('.demo-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Form submitted successfully!');
+    });
+
+    const password = document.getElementById('password');
+    password.addEventListener('input', function() {
+      const reqs = document.querySelectorAll('.req');
+      reqs.forEach(function(r) {
+        const type = r.dataset.req;
+        let valid = false;
+        if (type === 'length') valid = password.value.length >= 8;
+        if (type === 'number') valid = /\d/.test(password.value);
+        if (type === 'upper') valid = /[A-Z]/.test(password.value);
+        r.classList.toggle('met', valid);
+      });
+    });
+  </script>
 </body>
 </html>
